@@ -8,4 +8,9 @@ router.get("/add", (req, res) => {
   res.render("links/add");
 });
 
+// Ruta para el envio de datos del formulario.
+router.post("/add", (req, res) => {
+  res.send("Recived");
+});
+
 module.exports = router;

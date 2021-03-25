@@ -1,3 +1,27 @@
-<form action="">
-    
-</form>
+<div class="container p-4">
+    <div class="row">
+        <div class="col-12 col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/links/add" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title" placeholder="Titulo" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input type="url" class="form-control" name="url" placeholder="url">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" rows="2" class="form-control"
+                                placeholder="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block" type="submit">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

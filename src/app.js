@@ -6,9 +6,13 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session");
 const { database } = require("./keys");
+const passport = require('passport');
+
 
 // Inicializaciones.
 const app = express();
+require('./lib/passport');
+
 
 // Seteos.
 app.set("port", process.env.PORT || 3000);
@@ -39,6 +43,10 @@ app.use(flash());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // Variables Globales.
 app.use((req, res, next) => {

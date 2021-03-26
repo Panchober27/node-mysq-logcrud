@@ -2,6 +2,10 @@ const express = require("express");
 const morgan = require("morgan");
 const exphbs = require("express-handlebars");
 const path = require("path");
+const flash = require("connect-flash");
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session");
+const { database } = require("./keys");
 
 // Inicializaciones.
 const app = express();
@@ -20,15 +24,25 @@ app.engine(
     helpers: require("./lib/handlebars"),
   })
 );
-app.set('view engine', '.hbs');
+app.set("view engine", ".hbs");
 
 // Middlewares.
+app.use(
+  session({
+    secret: "panchober27nodeexpresshbscrudsession",
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore(database), // Guardo la sesion en la bd.
+  })
+);
+app.use(flash());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Variables Globales.
 app.use((req, res, next) => {
+  app.locals.success = req.flash("success"); // Guardo el mensaje en todas las vistas!!!
   next();
 });
 

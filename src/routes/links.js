@@ -8,9 +8,52 @@ router.get("/add", (req, res) => {
   res.render("links/add");
 });
 
-// Ruta para el envio de datos del formulario.
-router.post("/add", (req, res) => {
-  res.send("Recived");
+// Ruta para recibir de datos del formulario.
+router.post("/add", async (req, res) => {
+  // console.log(req.body);
+  const { title, url, description } = req.body;
+  const newLink = {
+    title,
+    url,
+    description,
+  };
+  await pool.query("INSERT INTO links set ?", [newLink]);
+  res.redirect("/links");
+});
+
+// Esta ruta le precede el prefijo links.
+router.get("/", async (req, res) => {
+  const links = await pool.query("SELECT * FROM links");
+  console.log(links);
+  res.render("links/list", { links });
+});
+
+// Ruta para eliminar un link.
+router.get("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  await pool.query("DELETE FROM links WHERE id = ?", [id]);
+  res.redirect("/links");
+});
+
+// Ruta para modificar un enlace
+router.get("/edit/:id", async (req, res) => {
+  const { id } = req.params;
+  const links = await pool.query("SELECT * FROM links WHERE id = ?", [id]);
+  res.render("links/edit", { link: links[0] });
+});
+
+// Ruta para la vista de modificar los enlaces.
+router.post("/edit/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, description, url } = req.body;
+  const newLink = {
+    title,
+    description,
+    url,
+  };
+  console.log(newLink);
+  await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id]);
+  res.redirect('/links');
 });
 
 module.exports = router;

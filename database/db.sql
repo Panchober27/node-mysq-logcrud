@@ -15,7 +15,7 @@ ALTER TABLE users
 ALTER TABLE users
     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
 
-DESCRIBE users;
+-- DESCRIBE users;
 
 -- Links Table
 CREATE TABLE links(

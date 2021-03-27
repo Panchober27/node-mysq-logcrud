@@ -1,0 +1,38 @@
+body {
+  background-color: #f5f6f5;
+  font-family: "Oswald", sans-serif;
+  overflow: hidden;
+}
+
+.nav-item {
+  margin-left: 7px;
+}
+
+.index {
+  width: 100vw;
+  height: 100vh;
+}
+
+.masterhead {
+  color: black;
+  min-height: 30rem;
+  width: 100%;
+  height: 100%;
+  padding-top: 8rem;
+  background: url("/img/wallpaper.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.masterhead h1 {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 992px) {
+  .masterhead h1 {
+    font-size: 5.5rem;
+  }
+}
